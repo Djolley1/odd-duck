@@ -1,36 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Vote Selector</title>
-    <link rel="stylesheet" href="styles.css"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Contest</title>
+  <link rel="resetsheet" href="reset.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
+  <header>
+    
+    <h1>Odd Duck Voting</h1>
+  </header>
+
+  <main>
     <div class="container">
-        <header class="header"></header>
-        <h1>Odd Ducks</h1>
+      <header class="header"></header>
 
-        <section class="product-group">
-            <h2>Product 1</h2>
-            <div class="product-container" id="product-container-1">
-                <img alt="Product 1">
-            </div>
-        </section>
+      <section class="products">
+        <figure class="product1">
+          <img id="img-1"/>
+        </figure>
 
-        <section class="product-group">
-            <h2>Product 2</h2>
-            <div class="product-container" id="product-container-2">
-                <img alt="Product 2">
-            </div>
-        </section>
+        <figure class="product2">
+          <img id="img-2"/>
+        </figure>
 
-        <section class="product-group">
-            <h2>Product 3</h2>
-            <div class="product-container" id="product-container-3">
-                <img alt="Product 3">
-            </div>
-        </section>
+        <figure class="product3">
+          <img id="img-3"/>
+        </figure>
+
+      </section>
+
+      <results class="results"></results>
+      <footer class="footer"></footer>
     </div>
 
-    <script src="./app.js"></script>
+
+  </main>
+
+  <footer>
+    <!-- Your footer content goes here -->
+    <p>&copy; 2024 My Website</p>
+  </footer>
+  <script src="./app.js"></script>
 </body>
+
 </html>

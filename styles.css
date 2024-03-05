@@ -1,57 +1,31 @@
-header {
-    border: 1px solid #333; /* Dark grey border */
-    background-color: #4d4d4d; /* Dark grey background */
-    color: #ffffff; /* White text */
-    padding: 10px; /* Padding for header */
-}
-
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f0f0f0; /* Light grey background */
-    text-align: center;
-    margin: 0;
-    padding: 0;
-}
-
-.container {
+.container {  display: grid;
+    grid-template-columns: 20% 1fr 1fr 1fr 20%;
+    grid-template-rows: 50px 1fr 1fr 50px;
+    grid-auto-columns: 1fr;
+    gap: 15px 15px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "header header header header header"
+      ". products products products ."
+      ". results results results ."
+      "footer footer footer footer footer";
+  }
+  
+  .header { grid-area: header; }
+  
+  .footer { grid-area: footer; }
+  
+  .results { grid-area: results; }
+  
+  .products { 
+    grid-area: products; 
     display: flex;
-    justify-content: space-around;
-    margin: 20px;
-}
-
-.product-group {
-    overflow: hidden;
-}
-
-.product-container {
-    display: flex;
-    transition: transform 0.5s ease;
-}
-
-.product-container img {
-    width: 100%;
-    max-width: 300px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-right: 10px;
-    display: block;
-}
-
-.product-group h2 {
-    text-align: center;
-    margin-bottom: 10px;
-    color: #333;
-}
-
-#results {
-    margin-top: 20px;
-}
-
-/* Add styling for shades of blue */
-.product-container img:hover {
-    filter: brightness(90%); /* Darken the image on hover */
-}
-
-.product-container img:active {
-    filter: brightness(80%); /* Further darken the image on click */
-}
+  }
+  
+  .header, .footer, .product1, .product2, .product3, .results { 
+    border: 1px solid black;
+  }
+  
+  img {
+    width: 150px;
+  }

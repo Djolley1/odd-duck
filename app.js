@@ -1,81 +1,105 @@
-state = {
+let state = {
   products: [],
-  maxVotes: 25,
+  maxVotes: 6,
   votesCast: 0,
-  roundsRemaining: 25,
+};
+
+// let allProducts = []
+let allProductNames = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'water-can', 'wine-glass'];
+for (let i = 0; i < allProductNames.length; i++) {
+  new Product(allProductNames[i], `./assets/${allProductNames[i]}.jpg`);
+  //"./assets/" + allProductNames[i] + ".jpg"  <--this is exactly what is inside the backtics above.
 }
 
-function Product(name, src) {
+let productImage1 = document.querySelector('.product1 img');
+let productImage2 = document.querySelector('.product2 img');
+let productImage3 = document.querySelector('.product3 img');
+
+
+// let productImage1 = document.getElementById('img-1');
+// let productImage2 = document.getElementById('img-2');
+// let productImage3 = document.getElementById('img-3');
+let productContainer = document.querySelector('.products');
+let resultsContainer = document.querySelector('.results');
+
+// Constructor function to create Product objects.
+function Product(name, imagePath) {
   this.name = name;
-  this.src = src;
-  this.votes = 0;
+  this.imagePath = imagePath;
   this.views = 0;
+  this.votes = 0;
   state.products.push(this);
 }
 
-function getRandomProduct() {
-  return state.products[Math.floor(Math.random() * state.products.length)];
+function getRandomNumber() {
+  return Math.floor(Math.random() * state.products.length);
 }
 
-function renderProduct(containerId) {
-  let container = document.getElementById(containerId);
-  let randomProduct = getRandomProduct();
-  
-  container.innerHTML = ''; // Clear the container
-  let img = document.createElement('img');
-  img.src = randomProduct.src;
-  img.alt = randomProduct.name;
+function renderProducts() {
+  let product1 = getRandomNumber();
+  let product2 = getRandomNumber();
+  let product3 = getRandomNumber();
 
-  container.appendChild(img);
+  if (product1 === product2 || product1 === product3 || product2 === product3) {
+    renderProducts();
+  }
 
-  randomProduct.views++;
+  //Showing product on screen.
+  productImage1.src = state.products[product1].imagePath;
+  productImage1.alt = state.products[product1].name;
 
-  img.addEventListener('click', clickHandler);
-  img.setAttribute('data-product-index', state.products.indexOf(randomProduct));
+  productImage2.src = state.products[product2].imagePath;
+  productImage2.alt = state.products[product2].name;
+
+  productImage3.src = state.products[product3].imagePath;
+  productImage3.alt = state.products[product3].name;
+  console.log('productImage1', productImage1)
+  // Add 1 to the number of views for each product.
+  state.products[product1].views++;
+  state.products[product2].views++;
+  state.products[product3].views++;
+
+  console.log(state.products);
+
 }
 
-function clickHandler(event) {
-  let productIndex = event.target.getAttribute('data-product-index');
-  if (productIndex !== null) {
-    let clickedProduct = state.products[+productIndex];
-    clickedProduct.votes++;
-
-    state.roundsRemaining--;
-
-    if (state.roundsRemaining === 0) {
-      alert('Voting session has ended. Thank you!');
-      state.votingSessionended = true;
-    }
-
-    // Determine which container was clicked and re-render that container
-    let containerId = event.target.closest('.product-container').id;
-    renderProduct(containerId);
+function showTotals() {
+  for (let i = 0; i < state.products.length; i++) {
+    let productData = document.createElement('div');
+    productData.textContent = `${state.products[i].name} had ${state.products[i].votes} votes and was shown ${state.products[i].views} times`;
+    resultsContainer.appendChild(productData);
   }
 }
 
-// Add your Product instances for all images
-new Product("Bag", "./img/201-lab11-assets-/assets/bag.jpg");
-new Product("Banana", "./img/201-lab11-assets-/assets/banana.jpg");
-new Product("Bathroom", "img/201-lab11-assets-/assets/bathroom.jpg");
-new Product("Boots", "img/201-lab11-assets-/assets/boots.jpg");
-new Product("Breakfast", "img/201-lab11-assets-/assets/breakfast.jpg");
-new Product("Bubblegum", "img/201-lab11-assets-/assets/bubblegum.jpg");
-new Product("Chair", "img/201-lab11-assets-/assets/chair.jpg");
-new Product("Cthulhu", "img/201-lab11-assets-/assets/cthulhu.jpg");
-new Product("Dog Duck", "img/201-lab11-assets-/assets/dog-duck.jpg");
-new Product("Dragon", "./img/201-lab11-assets-/assets/dragon.jpg");
-new Product("Pen", "./img/201-lab11-assets-/assets/pen.jpg");
-new Product("Pet Sweep", "./img/201-lab11-assets-/assets/pet-sweep.jpg");
-new Product("Scissors", "./img/201-lab11-assets-/assets/scissors.jpg");
-new Product("Shark", "./img/201-lab11-assets-/assets/shark.jpg");
-new Product("Sweep", "./img/201-lab11-assets-/assets/sweep.png");
-new Product("Tauntaun", "./img/201-lab11-assets-/assets/tauntaun.jpg");
-new Product("Unicorn", "./img/201-lab11-assets-/assets/unicorn.jpg");
-new Product("Water Can", "./img/201-lab11-assets-/assets/water-can.jpg");
-new Product("Wine Glass", "./img/201-lab11-assets-/assets/wine-glass.jpg");
 
+let canVote = true;
 
-// Initialize the rendering for each container
-renderProduct("product-container-1");
-renderProduct("product-container-2");
-renderProduct("product-container-3");
+function handleClick(event) {
+  if (!canVote) {
+    return; // If canVote is false, do not handle the click
+  }
+
+  let name = event.target.alt;
+  for (let i = 0; i < state.products.length; i++) {
+    if (state.products[i].name === name) {
+      state.products[i].votes++;
+      break;
+    }
+  }
+  state.votesCast++;
+
+  console.log(state);
+
+  if (state.votesCast >= state.maxVotes) {
+    showTotals();
+    canVote = false; // Set the flag to false to stop handling clicks
+  } else {
+    renderProducts();
+  }
+}
+
+// Add the event listener with the handleClick function
+productContainer.addEventListener('click', handleClick);
+
+// Initial rendering of products
+renderProducts();
