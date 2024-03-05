@@ -1,38 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Odd Duck Product Co</title>
-    <!-- Add any additional meta tags, stylesheets, or scripts here -->
+    <title>Vote Selector</title>
+    <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
-    <h1>Odd Duck Product Co</h1>
+    <div class="container">
+        <header class="header"></header>
+        <h1>Odd Ducks</h1>
 
-    <!-- Your content goes here -->
-
-    <header>
-        <h1>Your Website Title</h1>
-        <!-- Add navigation or other header elements here -->
-    </header>
-
-    <main>
-        <section>
-            <h2>Section 1</h2>
-            <!-- Add content for section 1 -->
+        <section class="product-group">
+            <h2>Product 1</h2>
+            <div class="product-container" id="product-container-1">
+                <img alt="Product 1">
+            </div>
         </section>
 
-        <section>
-            <h2>Section 2</h2>
-            <!-- Add content for section 2 -->
+        <section class="product-group">
+            <h2>Product 2</h2>
+            <div class="product-container" id="product-container-2">
+                <img alt="Product 2">
+            </div>
         </section>
-    </main>
 
-    <footer>
-        <!-- Add footer content, such as copyright information or links -->
-    </footer>
+        <section class="product-group">
+            <h2>Product 3</h2>
+            <div class="product-container" id="product-container-3">
+                <img alt="Product 3">
+            </div>
+        </section>
+    </div>
 
-    <!-- Add any additional scripts or other elements before closing the body tag -->
-
+    <script src="./app.js"></script>
 </body>
 </html>
