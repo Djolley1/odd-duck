@@ -103,3 +103,48 @@ productContainer.addEventListener('click', handleClick);
 
 // Initial rendering of products
 renderProducts();
+
+let namesArray = [];
+let viewsArray = [];
+let votesArray = [];
+let chartColors = [];
+for (let i = 0; i < state.products.length; i++) {
+  namesArray.push(state.products[i].name);
+  viewsArray.push(state.products[i].views);
+  votesArray.push(state.products[i].votes);
+  let color1 = Math.floor(256 * Math.random());
+  let color2 = Math.floor(256 * Math.random());
+  let color3 = Math.floor(256 * Math.random());
+  chartColors.push(`rgba(${color1}, ${color2}, ${color3}, 1)`);
+}
+function makeBarChart(canvasid, data, labels, chartLabel) {
+  const ctx = document.getElementById(canvasid);
+  const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: '# of ' + chartLabel,
+        data: data,
+        backgroundColor: chartColors,
+        borderWidth: 1,
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}
+makeBarChart('myChart', viewsArray, namesArray, 'Views');
+
+
+
+
+
+
+
+
