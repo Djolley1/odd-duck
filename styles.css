@@ -29,3 +29,20 @@
   img {
     width: 150px;
   }
+
+  header {
+    background: gray;
+    text-align: center;
+    padding: 10px;
+  }
+
+  footer {
+    background: gray;
+    text-align: center;
+    padding: 5px
+  }
+
+  main {
+    background: lightseagreen;
+    
+  }
