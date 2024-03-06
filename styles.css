@@ -22,10 +22,26 @@
     display: flex;
   }
   
-  .header, .footer, .product1, .product2, .product3, .results { 
+  .header, .footer, .product1, .product2, .product3, { 
     border: 1px solid black;
   }
   
   img {
     width: 150px;
+  }
+
+  header {
+    background-color: darkslategrey;
+    text-align: center;
+    padding: 5px;
+  }
+
+  footer {
+    background-color: darkslategrey;
+    text-align: center;
+    padding: 5px;
+  }
+
+  main {
+    background-color: darkgray;
   }
