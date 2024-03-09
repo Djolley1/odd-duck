@@ -1,17 +1,18 @@
 // Declare a single "state" variable (object) to store application variables.
-let state = {
-  products: [],
+let state = { // object
+  products: [], // left:(key) right:(value)
   maxVotes: 25,
   votesCast: 0,
   previousImages: []
 };
-
+//`${}= concatenated string
 let allProductNames = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'water-can', 'wine-glass'];
 for (let i = 0; i < allProductNames.length; i++) {
   new Product(allProductNames[i], `./assets/${allProductNames[i]}.jpg`);
 
 }
 //These are the HTML elements in the markup where the product images and product results will be inserted in to.
+// 
 let productImage1 = document.querySelector('.product1 img');
 let productImage2 = document.querySelector('.product2 img');
 let productImage3 = document.querySelector('.product3 img');
@@ -19,13 +20,14 @@ let productContainer = document.querySelector('.products');
 let resultsContainer = document.querySelector('.results');
 
 //Constructor function to create Product objects. The product constructor.
-function Product(name, imagePath) {
-  this.name = name;
-  this.imagePath = imagePath;
-  this.views = 0;
-  this.votes = 0;
-  state.products.push(this);
-}
+//Parameter = placeholders, nothing will happen until you create the new Product and pass in actual values.
+// function Product(name, imagePath) {
+//   this.name = name;
+//   this.imagePath = imagePath;
+//   this.views = 0;
+//   this.votes = 0;
+//   state.products.push(this);
+// }
 function getRandomNumber() {
   return Math.floor(Math.random() * state.products.length);
 }
@@ -135,6 +137,7 @@ function showTotals() {
 }
 
 productContainer.addEventListener('click', voteForTheProduct);
+//this is what trigger the event to be clickable.
 function voteForTheProduct(event) {
   let name = event.target.alt;
   for (let i = 0; i < state.products.length; i++) {
